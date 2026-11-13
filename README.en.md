@@ -49,7 +49,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File pastelatex/install.ps1
 
 Restart Typora. Copy an answer containing formulas and paste it — done.
 
-Or grab `PasteLaTeX-0.6.0.zip` from [Releases](https://github.com/BianJi777/PasteLaTeX/releases) and unpack it to
+Or grab `plugin.zip` from [Releases](https://github.com/BianJi777/PasteLaTeX/releases) and unpack it to
 `%APPDATA%\Typora\plugins\plugins\bianji777.pastelatex\`, then add `"bianji777.pastelatex": true` to
 `%APPDATA%\Typora\plugins\settings\plugins.json`.
 

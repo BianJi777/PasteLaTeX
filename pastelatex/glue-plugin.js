@@ -104,12 +104,13 @@ function handlePaste(ev) {
     var hasNodes = SETTINGS.convertKatex && !!html && (html.indexOf('katex') >= 0 || html.indexOf('<math') >= 0);
     var hasSources = SETTINGS.convertKatex && !!html && html.indexOf('data-math-source') >= 0;
     var hasTable = !!html && html.indexOf('<table') >= 0;
+    var hasList = !!html && (html.indexOf('<ul') >= 0 || html.indexOf('<ol') >= 0);
     var hasDelims = SETTINGS.convertDelims && (/\\[([\[]/.test(html) || /\\[([\[]/.test(plain));
     var hasBare = SETTINGS.wrapBare && (/\\(frac|dfrac|tfrac|binom|sqrt)\s*[[{]/.test(html) || /\\(frac|dfrac|tfrac|binom|sqrt)\s*[[{]/.test(plain));
 
     if (!hasNodes && !hasSources && !hasDelims && !hasBare) { log('skip no-math'); return; }
 
-    if (html && (hasTable || hasSources || (!hasNodes && (hasDelims || hasBare)))) {
+    if (html && (hasTable || hasList || hasSources || (!hasNodes && (hasDelims || hasBare)))) {
       var fixed = (hasNodes || hasSources) ? convertHtml(html) : fixHtmlText(html);
       log('html path count=' + fixed.count + ' len=' + html.length);
       if (!fixed.count) return;
