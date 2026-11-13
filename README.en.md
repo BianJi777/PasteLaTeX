@@ -49,8 +49,8 @@ powershell -NoProfile -ExecutionPolicy Bypass -File pastelatex/install.ps1
 
 Restart Typora. Copy an answer containing formulas and paste it — done.
 
-Or grab `PasteLaTeX-0.5.0.zip` from [Releases](https://github.com/BianJi777/PasteLaTeX/releases) and unpack it to
-`%APPDATA%\Typora\plugins\plugins\pastelatex\`, then add `"pastelatex": true` to
+Or grab `PasteLaTeX-0.6.0.zip` from [Releases](https://github.com/BianJi777/PasteLaTeX/releases) and unpack it to
+`%APPDATA%\Typora\plugins\plugins\bianji777.pastelatex\`, then add `"bianji777.pastelatex": true` to
 `%APPDATA%\Typora\plugins\settings\plugins.json`.
 
 ## Supported
@@ -76,7 +76,7 @@ Or grab `PasteLaTeX-0.5.0.zip` from [Releases](https://github.com/BianJi777/Past
 
 On first run the plugin writes `settings.json` next to it:
 
-    %APPDATA%\Typora\plugins\plugins\pastelatex\settings.json
+    %APPDATA%\Typora\plugins\plugins\bianji777.pastelatex\settings.json
 
 ```json
 { "convertKatex": true, "convertDelims": true, "wrapBare": true, "debug": false }

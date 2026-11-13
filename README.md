@@ -23,8 +23,8 @@ powershell -NoProfile -ExecutionPolicy Bypass -File pastelatex/install.ps1
 
 重启 Typora，从 AI 对话框复制带公式的回答，直接粘贴即可。
 
-**不想 clone？** 到 [Releases](https://github.com/BianJi777/PasteLaTeX/releases) 下载 `PasteLaTeX-0.5.0.zip`，解压到
-`%APPDATA%\Typora\plugins\plugins\pastelatex\`，并在 `%APPDATA%\Typora\plugins\settings\plugins.json` 中加入 `"pastelatex": true`。
+**不想 clone？** 到 [Releases](https://github.com/BianJi777/PasteLaTeX/releases) 下载 `PasteLaTeX-0.6.0.zip`，解压到
+`%APPDATA%\Typora\plugins\plugins\bianji777.pastelatex\`，并在 `%APPDATA%\Typora\plugins\settings\plugins.json` 中加入 `"bianji777.pastelatex": true`。
 
 ## 已验证平台
 
@@ -60,7 +60,7 @@ PasteLaTeX 在粘贴时把每个 `.katex` 节点还原成 TeX，再交给 Typora
 
 ## 仓库结构
 
-    pastelatex/        Typora 插件（v0.5.0）
+    pastelatex/        Typora 插件（v0.6.0）
       glue-plugin.js    粘贴拦截 + 节点替换
       build-plugin.mjs  构建：把转换器内联进 dist/main.js
       manifest.json     插件清单
@@ -102,14 +102,14 @@ PasteLaTeX 在粘贴时把每个 `.katex` 节点还原成 TeX，再交给 Typora
 
 安装脚本会写入：
 
-    %APPDATA%\Typora\plugins\plugins\pastelatex\
+    %APPDATA%\Typora\plugins\plugins\bianji777.pastelatex\
     %APPDATA%\Typora\plugins\settings\plugins.json
 
 ## 设置
 
 首次启动会在插件目录生成 `settings.json`：
 
-    %APPDATA%\Typora\plugins\plugins\pastelatex\settings.json
+    %APPDATA%\Typora\plugins\plugins\bianji777.pastelatex\settings.json
 
 ```json
 {
