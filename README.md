@@ -26,6 +26,19 @@ powershell -NoProfile -ExecutionPolicy Bypass -File pastelatex/install.ps1
 **不想 clone？** 到 [Releases](https://github.com/BianJi777/PasteLaTeX/releases) 下载 `PasteLaTeX-0.5.0.zip`，解压到
 `%APPDATA%\Typora\plugins\plugins\pastelatex\`，并在 `%APPDATA%\Typora\plugins\settings\plugins.json` 中加入 `"pastelatex": true`。
 
+## 已验证平台
+
+以下产品的**网页端**复制 → 粘贴进 Typora 已实测通过：
+
+| 平台 | 状态 | 备注 |
+|---|---|---|
+| DeepSeek | ✅ | 行内公式、表格 |
+| ChatGPT | ✅ | 表格中的公式、\(...\) 定界符 |
+| Gemini | ✅ | 行内 / 块级公式 |
+| 豆包 | ✅ | 行内公式 |
+
+> 如果你在其他平台遇到问题，欢迎提 Issue，附上原始公式和期望效果。
+
 ## 解决什么问题
 
 DeepSeek / ChatGPT 网页端复制出来的公式，HTML 里是这样的：

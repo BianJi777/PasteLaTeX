@@ -25,6 +25,17 @@ Pasting it into Typora yields duplicated, flattened text such as `C2n=n(n−1)2C
 PasteLaTeX intercepts the paste, rebuilds TeX from the MathML, and hands the result to Typora's own
 `editor.UserOp.pasteHandler`, so lists, bold text and the undo stack keep working.
 
+## Tested with
+
+Copying from the web UI of these products into Typora has been verified:
+
+| Product | Status | Notes |
+|---|---|---|
+| DeepSeek | ✅ | inline math, tables |
+| ChatGPT | ✅ | math inside tables, \(...\) delimiters |
+| Gemini | ✅ | inline and display math |
+| Doubao | ✅ | inline math |
+
 ## Install
 
 Requires Typora and [typora-community-plugin](https://github.com/typora-community-plugin/typora-community-plugin).
