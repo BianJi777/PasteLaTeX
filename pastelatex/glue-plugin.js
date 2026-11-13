@@ -1,33 +1,56 @@
 __MATHML2TEX__
 
-var DEBUG = false;
+var DEFAULTS = { convertKatex: true, convertDelims: true, wrapBare: true, debug: false };
+var SETTINGS = DEFAULTS;
 var LOG = 'C:/Users/34132/.typora/paste-math.log';
 
 function fsx() { try { return window.reqnode ? window.reqnode('fs') : null; } catch (e) { return null; } }
 function log(s) {
-  if (!DEBUG) return;
+  if (!SETTINGS.debug) return;
   try { var f = fsx(); if (f) f.appendFileSync(LOG, s + '\n'); } catch (e) {}
 }
-
-function sourceText(el) {
-  var tex = (el.getAttribute('data-math-source') || '').trim();
-  return tex || null;
+function notify(msg) {
+  try {
+    var ed = window.editor;
+    if (ed && ed.EditHelper && ed.EditHelper.showNotification) {
+      ed.EditHelper.showNotification('PasteLaTeX: ' + msg);
+    }
+  } catch (e) {}
+}
+function loadSettings(dir) {
+  try {
+    var fs = fsx();
+    var pathMod = window.reqnode('path');
+    var p = pathMod.join(dir, 'settings.json');
+    if (fs.existsSync(p)) {
+      var j = JSON.parse(fs.readFileSync(p, 'utf8'));
+      var merged = {};
+      for (var k in DEFAULTS) merged[k] = (typeof j[k] === 'boolean') ? j[k] : DEFAULTS[k];
+      return merged;
+    }
+    fs.writeFileSync(p, JSON.stringify(DEFAULTS, null, 2));
+  } catch (e) {}
+  return DEFAULTS;
+}
+function fixText(v) {
+  var nv = v;
+  if (SETTINGS.convertDelims) nv = normalizeDelimiters(nv);
+  if (SETTINGS.wrapBare) nv = wrapBareCommands(nv);
+  return nv;
 }
 
 function convertHtml(html) {
   var doc = new DOMParser().parseFromString(html, 'text/html');
   var n = 0;
-
   var sources = Array.prototype.slice.call(doc.querySelectorAll('[data-math-source]'));
   for (var s = 0; s < sources.length; s++) {
     var el0 = sources[s];
-    var tex0 = sourceText(el0);
+    var tex0 = (el0.getAttribute('data-math-source') || '').trim();
     if (!tex0) continue;
     var disp0 = el0.getAttribute('data-math-display') === 'true';
     el0.replaceWith(doc.createTextNode(disp0 ? ('$$' + tex0 + '$$') : ('$' + tex0 + '$')));
     n++;
   }
-
   var els = Array.prototype.slice.call(doc.querySelectorAll('.katex-display, .katex'));
   for (var i = 0; i < els.length; i++) {
     var el = els[i];
@@ -49,7 +72,6 @@ function convertHtml(html) {
 function fixHtmlText(html) {
   var doc = new DOMParser().parseFromString(html, 'text/html');
   var n = 0;
-
   var walker = doc.createTreeWalker(doc.body, NodeFilter.SHOW_TEXT, null);
   var nodes = [];
   while (walker.nextNode()) nodes.push(walker.currentNode);
@@ -60,7 +82,7 @@ function fixHtmlText(html) {
     var v = node.nodeValue;
     if (!v) continue;
     if (v.indexOf('\\(') < 0 && v.indexOf('\\[') < 0 && !/\\(frac|dfrac|tfrac|binom|sqrt)/.test(v)) continue;
-    var nv = wrapBareCommands(normalizeDelimiters(v));
+    var nv = fixText(v);
     if (nv !== v) { node.nodeValue = nv; n++; }
   }
   return { html: doc.body.innerHTML, count: n };
@@ -79,15 +101,14 @@ function handlePaste(ev) {
     try { html = cd.getData('text/html') || ''; } catch (e) {}
     try { plain = cd.getData('text/plain') || ''; } catch (e) {}
 
-    var hasNodes = !!html && (html.indexOf('katex') >= 0 || html.indexOf('<math') >= 0);
-    var hasSources = !!html && html.indexOf('data-math-source') >= 0;
+    var hasNodes = SETTINGS.convertKatex && !!html && (html.indexOf('katex') >= 0 || html.indexOf('<math') >= 0);
+    var hasSources = SETTINGS.convertKatex && !!html && html.indexOf('data-math-source') >= 0;
     var hasTable = !!html && html.indexOf('<table') >= 0;
-    var hasDelims = /\\[([\[]/.test(html) || /\\[([\[]/.test(plain);
-    var hasBare = /\\(frac|dfrac|tfrac|binom|sqrt)\s*[[{]/.test(html) || /\\(frac|dfrac|tfrac|binom|sqrt)\s*[[{]/.test(plain);
+    var hasDelims = SETTINGS.convertDelims && (/\\[([\[]/.test(html) || /\\[([\[]/.test(plain));
+    var hasBare = SETTINGS.wrapBare && (/\\(frac|dfrac|tfrac|binom|sqrt)\s*[[{]/.test(html) || /\\(frac|dfrac|tfrac|binom|sqrt)\s*[[{]/.test(plain));
 
     if (!hasNodes && !hasSources && !hasDelims && !hasBare) { log('skip no-math'); return; }
 
-    // Tables and other rich structures: keep the HTML, only swap math in place.
     if (html && (hasTable || hasSources || (!hasNodes && (hasDelims || hasBare)))) {
       var fixed = (hasNodes || hasSources) ? convertHtml(html) : fixHtmlText(html);
       log('html path count=' + fixed.count + ' len=' + html.length);
@@ -95,7 +116,7 @@ function handlePaste(ev) {
       ev.preventDefault();
       ev.stopImmediatePropagation();
       try { ed.UserOp.pasteHandler(ed, fixed.html, false); }
-      catch (e1) { log('html insert ERR ' + e1.message); }
+      catch (e1) { log('html insert ERR ' + e1.message); notify('表格公式转换失败，已保留原文'); }
       return;
     }
 
@@ -108,21 +129,26 @@ function handlePaste(ev) {
       var md = null;
       try { md = ed.UserOp.getMarkdownSourceFrom(out.html); } catch (e2) { log('md ERR ' + e2.message); }
       if (!md) return;
-      md = wrapBareCommands(normalizeDelimiters(md));
+      md = fixText(md);
       md = md.replace(/\$\$([\s\S]*?)\$\$/g, function (_, body) {
         return '\n\n$$\n' + body.trim() + '\n$$\n\n';
       });
       try { ed.UserOp.pasteHandler(ed, md, true); }
-      catch (e3) { try { ed.UserOp.pasteHandler(ed, out.html, false); } catch (e4) { log('md ERR2 ' + e4.message); } }
+      catch (e3) {
+        log('md insert ERR ' + e3.message);
+        try { ed.UserOp.pasteHandler(ed, out.html, false); }
+        catch (e4) { log('md ERR2 ' + e4.message); notify('公式插入失败，已保留原文'); }
+      }
       return;
     }
 
     if (!plain) return;
-    var pmd = wrapBareCommands(normalizeDelimiters(plain));
+    var pmd = fixText(plain);
     if (pmd === plain) return;
     ev.preventDefault();
     ev.stopImmediatePropagation();
-    try { ed.UserOp.pasteHandler(ed, pmd, true); } catch (e5) { log('plain ERR ' + e5.message); }
+    try { ed.UserOp.pasteHandler(ed, pmd, true); }
+    catch (e5) { log('plain ERR ' + e5.message); notify('公式插入失败，已保留原文'); }
   } catch (e) { log('ERR ' + e.message); }
 }
 
@@ -135,6 +161,7 @@ export default class PasteLaTeXPlugin {
   load() { this.onload(); }
   unload() { this.onunload(); }
   onload() {
+    SETTINGS = loadSettings(this.manifest.dir);
     this._handler = function (ev) { handlePaste(ev); };
     document.addEventListener('paste', this._handler, true);
   }

@@ -38,7 +38,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File pastelatex/install.ps1
 
 Restart Typora. Copy an answer containing formulas and paste it — done.
 
-Or grab `PasteLaTeX-0.4.0.zip` from [Releases](https://github.com/BianJi777/PasteLaTeX/releases) and unpack it to
+Or grab `PasteLaTeX-0.5.0.zip` from [Releases](https://github.com/BianJi777/PasteLaTeX/releases) and unpack it to
 `%APPDATA%\Typora\plugins\plugins\pastelatex\`, then add `"pastelatex": true` to
 `%APPDATA%\Typora\plugins\settings\plugins.json`.
 
@@ -61,9 +61,21 @@ Or grab `PasteLaTeX-0.4.0.zip` from [Releases](https://github.com/BianJi777/Past
 | `\ce{}` (chemistry) | ⚠️ degrades to plain text |
 | `\color`, `\cancel` | ⚠️ styling lost at the source |
 
+## Settings
+
+On first run the plugin writes `settings.json` next to it:
+
+    %APPDATA%\Typora\plugins\plugins\pastelatex\settings.json
+
+```json
+{ "convertKatex": true, "convertDelims": true, "wrapBare": true, "debug": false }
+```
+
+Restart Typora after editing.
+
 ## Repo layout
 
-    pastelatex/        Typora plugin (v0.4.0)
+    pastelatex/        Typora plugin (v0.5.0)
     m2t/               pure MathML -> TeX converter + fixtures + tests
     docs/              images
 

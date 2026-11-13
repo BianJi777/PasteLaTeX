@@ -163,7 +163,7 @@ export function mathmlToTex(mathml) {
 // Convert \(...\) and \[...\] delimiters (common in AI chat output) into
 // Typora-friendly $...$ and $$...$$ blocks. Code fences are left untouched.
 export function normalizeDelimiters(md) {
-  const parts = md.split(/(```[\s\S]*?```)/g);
+  const parts = md.split(/(```[\s\S]*?```|`[^`\n]*`)/g);
   for (let i = 0; i < parts.length; i++) {
     if (i % 2 === 1) continue;
     parts[i] = parts[i]

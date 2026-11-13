@@ -23,7 +23,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File pastelatex/install.ps1
 
 重启 Typora，从 AI 对话框复制带公式的回答，直接粘贴即可。
 
-**不想 clone？** 到 [Releases](https://github.com/BianJi777/PasteLaTeX/releases) 下载 `PasteLaTeX-0.4.0.zip`，解压到
+**不想 clone？** 到 [Releases](https://github.com/BianJi777/PasteLaTeX/releases) 下载 `PasteLaTeX-0.5.0.zip`，解压到
 `%APPDATA%\Typora\plugins\plugins\pastelatex\`，并在 `%APPDATA%\Typora\plugins\settings\plugins.json` 中加入 `"pastelatex": true`。
 
 ## 解决什么问题
@@ -47,7 +47,7 @@ PasteLaTeX 在粘贴时把每个 `.katex` 节点还原成 TeX，再交给 Typora
 
 ## 仓库结构
 
-    pastelatex/        Typora 插件（v0.4.0）
+    pastelatex/        Typora 插件（v0.5.0）
       glue-plugin.js    粘贴拦截 + 节点替换
       build-plugin.mjs  构建：把转换器内联进 dist/main.js
       manifest.json     插件清单
@@ -92,6 +92,30 @@ PasteLaTeX 在粘贴时把每个 `.katex` 节点还原成 TeX，再交给 Typora
     %APPDATA%\Typora\plugins\plugins\pastelatex\
     %APPDATA%\Typora\plugins\settings\plugins.json
 
+## 设置
+
+首次启动会在插件目录生成 `settings.json`：
+
+    %APPDATA%\Typora\plugins\plugins\pastelatex\settings.json
+
+```json
+{
+  "convertKatex": true,
+  "convertDelims": true,
+  "wrapBare": true,
+  "debug": false
+}
+```
+
+| 键 | 作用 |
+|---|---|
+| `convertKatex` | 转换 KaTeX 节点 / `data-math-source` |
+| `convertDelims` | 转换 `\(...\)` 与 `\[...\]` |
+| `wrapBare` | 转换裸 `\frac{}{}`、`\sqrt{}`、`\binom{}{}` |
+| `debug` | 写调试日志到 `~/.typora/paste-math.log` |
+
+改完重启 Typora 生效。
+
 ## 卸载
 
 ```powershell
@@ -104,6 +128,11 @@ powershell -NoProfile -ExecutionPolicy Bypass -File pastelatex/uninstall.ps1
 - 依赖 Typora 的 MathJax 渲染，块级公式统一输出为 `$$\n…\n$$`。
 
 ## 更新日志
+
+### v0.5.0
+- 新增 `settings.json` 开关（KaTeX / 定界符 / 裸命令 / 日志）
+- 转换失败时弹出通知，不再静默
+- 修复行内代码里的 `\(...\)` 被误转换
 
 ### v0.4.0
 - 支持 `<table>` 中的公式：保留表格结构，只替换单元格里的数学

@@ -23,5 +23,10 @@
     "name": "existing_dollar_untouched",
     "input": "$x^2$",
     "expected": "$x^2$"
+  },
+  {
+    "name": "inline_code_untouched",
+    "input": "写 `\\(x^2\\)` 这样",
+    "expected": "写 `\\(x^2\\)` 这样"
   }
 ]
