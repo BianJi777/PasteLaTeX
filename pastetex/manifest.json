@@ -1,7 +1,7 @@
 {
-  "id": "typora-math",
-  "name": "Typora Math Paste",
-  "version": "0.1.0",
+  "id": "pastetex",
+  "name": "PasteTeX",
+  "version": "0.2.0",
   "description": "Convert pasted AI-chat math (KaTeX MathML without annotation) into Typora-compatible $...$ LaTeX.",
   "author": "dsh",
   "minCoreVersion": "2.0.0",

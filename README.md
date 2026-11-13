@@ -14,14 +14,14 @@
 ```powershell
 git clone https://github.com/BianJi777/PasteTeX.git
 cd PasteTeX
-node typora-math/build-plugin.mjs
-powershell -NoProfile -ExecutionPolicy Bypass -File typora-math/install.ps1
+node pastetex/build-plugin.mjs
+powershell -NoProfile -ExecutionPolicy Bypass -File pastetex/install.ps1
 ```
 
 重启 Typora，从 AI 对话框复制带公式的回答，直接粘贴即可。
 
-**不想 clone？** 到 [Releases](https://github.com/BianJi777/PasteTeX/releases) 下载 `PasteTeX-0.1.0.zip`，解压到
-`%APPDATA%\Typora\plugins\plugins\typora-math\`，并在 `%APPDATA%\Typora\plugins\settings\plugins.json` 中加入 `"typora-math": true`。
+**不想 clone？** 到 [Releases](https://github.com/BianJi777/PasteTeX/releases) 下载 `PasteTeX-0.2.0.zip`，解压到
+`%APPDATA%\Typora\plugins\plugins\pastetex\`，并在 `%APPDATA%\Typora\plugins\settings\plugins.json` 中加入 `"pastetex": true`。
 
 ## 解决什么问题
 
@@ -44,7 +44,7 @@ PasteTeX 在粘贴时把每个 `.katex` 节点还原成 TeX，再交给 Typora �
 
 ## 仓库结构
 
-    typora-math/        Typora 插件（v0.1.0）
+    pastetex/        Typora 插件（v0.2.0）
       glue-plugin.js    粘贴拦截 + 节点替换
       build-plugin.mjs  构建：把转换器内联进 dist/main.js
       manifest.json     插件清单
@@ -75,21 +75,21 @@ PasteTeX 在粘贴时把每个 `.katex` 节点还原成 TeX，再交给 Typora �
 2. 构建并安装：
 
    ```powershell
-   node typora-math/build-plugin.mjs
-   powershell -NoProfile -ExecutionPolicy Bypass -File typora-math/install.ps1
+   node pastetex/build-plugin.mjs
+   powershell -NoProfile -ExecutionPolicy Bypass -File pastetex/install.ps1
    ```
 
 3. 重启 Typora。
 
 安装脚本会写入：
 
-    %APPDATA%\Typora\plugins\plugins\typora-math\
+    %APPDATA%\Typora\plugins\plugins\pastetex\
     %APPDATA%\Typora\plugins\settings\plugins.json
 
 ## 卸载
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File typora-math/uninstall.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File pastetex/uninstall.ps1
 ```
 
 ## 已知限制
