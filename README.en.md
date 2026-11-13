@@ -6,7 +6,7 @@ Paste math from AI chats into Typora. Converts KaTeX MathML (which usually has n
 [![test](https://github.com/BianJi777/PasteLaTeX/actions/workflows/test.yml/badge.svg)](https://github.com/BianJi777/PasteLaTeX/actions/workflows/test.yml)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-![before and after](docs/before-after-demo.png)
+![before and after](docs/comparison-deepseek-chatgpt.png)
 
 ## Why
 
@@ -36,9 +36,6 @@ Copying from the web UI of these products into Typora has been verified:
 | Gemini | ✅ | inline and display math |
 | Doubao | ✅ | inline math |
 
-Real world (plain paste → ChatGPT source → after PasteLaTeX):
-
-![real world](docs/before-after-real.png)
 
 ## Install
 

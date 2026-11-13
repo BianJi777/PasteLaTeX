@@ -8,7 +8,7 @@
 
 [English](README.en.md)
 
-![粘贴前后对比](docs/before-after-demo.png)
+![粘贴前后对比](docs/comparison-deepseek-chatgpt.png)
 
 ## 快速开始
 
@@ -39,9 +39,6 @@ powershell -NoProfile -ExecutionPolicy Bypass -File pastelatex/install.ps1
 
 > 如果你在其他平台遇到问题，欢迎提 Issue，附上原始公式和期望效果。
 
-真实场景（直接粘贴 → ChatGPT 源 → PasteLaTeX 处理后）：
-
-![真实场景对比](docs/before-after-real.png)
 
 ## 解决什么问题
 
