@@ -39,6 +39,10 @@ powershell -NoProfile -ExecutionPolicy Bypass -File pastelatex/install.ps1
 
 > 如果你在其他平台遇到问题，欢迎提 Issue，附上原始公式和期望效果。
 
+真实场景（ChatGPT → 直接粘贴 → PasteLaTeX 处理后）：
+
+![真实场景对比](docs/before-after-real.png)
+
 ## 解决什么问题
 
 DeepSeek / ChatGPT 网页端复制出来的公式，HTML 里是这样的：
