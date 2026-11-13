@@ -1,0 +1,32 @@
+[
+  {
+    "name": "bare_frac",
+    "input": "最多 \\frac{(n-1)(n-2)}{2} 条边",
+    "expected": "最多 $\\frac{(n-1)(n-2)}{2}$ 条边"
+  },
+  {
+    "name": "bare_sqrt",
+    "input": "\\sqrt{x+1}",
+    "expected": "$\\sqrt{x+1}$"
+  },
+  {
+    "name": "bare_two_fracs",
+    "input": "\\frac{a}{b} 和 \\frac{c}{d}",
+    "expected": "$\\frac{a}{b}$ 和 $\\frac{c}{d}$"
+  },
+  {
+    "name": "bare_in_fence",
+    "input": "```\n\\frac{a}{b}\n```",
+    "expected": "```\n\\frac{a}{b}\n```"
+  },
+  {
+    "name": "bare_already_math",
+    "input": "$\\frac{a}{b}$",
+    "expected": "$\\frac{a}{b}$"
+  },
+  {
+    "name": "bare_symbol_only",
+    "input": "\\alpha + \\beta",
+    "expected": "\\alpha + \\beta"
+  }
+]

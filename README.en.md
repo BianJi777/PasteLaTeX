@@ -38,7 +38,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File pastelatex/install.ps1
 
 Restart Typora. Copy an answer containing formulas and paste it — done.
 
-Or grab `PasteLaTeX-0.3.0.zip` from [Releases](https://github.com/BianJi777/PasteLaTeX/releases) and unpack it to
+Or grab `PasteLaTeX-0.4.0.zip` from [Releases](https://github.com/BianJi777/PasteLaTeX/releases) and unpack it to
 `%APPDATA%\Typora\plugins\plugins\pastelatex\`, then add `"pastelatex": true` to
 `%APPDATA%\Typora\plugins\settings\plugins.json`.
 
@@ -55,12 +55,15 @@ Or grab `PasteLaTeX-0.3.0.zip` from [Releases](https://github.com/BianJi777/Past
 | Sets, logic, binomials | ✅ |
 | Text, angles, geometry symbols | ✅ |
 | Nested formulas | ✅ |
+| Math inside AI chat tables | ✅ |
+| `\\(...\\)` / `\\[...\\]` delimiters | ✅ |
+| Bare `\\frac{}{}`, `\\sqrt{}` | ✅ |
 | `\ce{}` (chemistry) | ⚠️ degrades to plain text |
 | `\color`, `\cancel` | ⚠️ styling lost at the source |
 
 ## Repo layout
 
-    pastelatex/        Typora plugin (v0.3.0)
+    pastelatex/        Typora plugin (v0.4.0)
     m2t/               pure MathML -> TeX converter + fixtures + tests
     docs/              images
 

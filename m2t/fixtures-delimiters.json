@@ -1,0 +1,27 @@
+[
+  {
+    "name": "inline_paren",
+    "input": "最多 \\(\\frac{(n-1)(n-2)}{2}\\) 条边",
+    "expected": "最多 $\\frac{(n-1)(n-2)}{2}$ 条边"
+  },
+  {
+    "name": "inline_sum",
+    "input": "\\(\\sum TD(v_i)=2|E|\\)",
+    "expected": "$\\sum TD(v_i)=2|E|$"
+  },
+  {
+    "name": "display_bracket",
+    "input": "\\[ x^2 + y^2 \\]",
+    "expected": "\n\n$$\nx^2 + y^2\n$$\n\n"
+  },
+  {
+    "name": "code_fence_untouched",
+    "input": "```\n\\(x\\)\n```",
+    "expected": "```\n\\(x\\)\n```"
+  },
+  {
+    "name": "existing_dollar_untouched",
+    "input": "$x^2$",
+    "expected": "$x^2$"
+  }
+]

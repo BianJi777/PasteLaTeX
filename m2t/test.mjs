@@ -1,24 +1,29 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { mathmlToTex } from './mathml2tex.mjs';
+import { mathmlToTex, normalizeDelimiters, wrapBareCommands } from './mathml2tex.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const fixtures = JSON.parse(readFileSync(path.join(here, 'fixtures.json'), 'utf8'));
+const groups = [
+  { file: 'fixtures.json', run: (c) => [mathmlToTex(c.mathml), c.tex] },
+  { file: 'fixtures-delimiters.json', run: (c) => [normalizeDelimiters(c.input), c.expected] },
+  { file: 'fixtures-bare.json', run: (c) => [wrapBareCommands(c.input), c.expected] },
+];
 
-let failed = 0;
-for (const f of fixtures) {
-  const got = mathmlToTex(f.mathml);
-  if (got === f.tex) {
-    console.log('ok   ' + f.name);
-  } else {
-    failed++;
-    console.error('FAIL ' + f.name);
-    console.error('  expected: ' + f.tex);
-    console.error('  got:      ' + got);
+let total = 0, failed = 0;
+for (const g of groups) {
+  for (const f of JSON.parse(readFileSync(path.join(here, g.file), 'utf8'))) {
+    total++;
+    const [got, expected] = g.run(f);
+    if (got === expected) console.log('ok   ' + f.name);
+    else {
+      failed++;
+      console.error('FAIL ' + f.name);
+      console.error('  expected: ' + JSON.stringify(expected));
+      console.error('  got:      ' + JSON.stringify(got));
+    }
   }
 }
-
 console.log('');
-console.log((fixtures.length - failed) + '/' + fixtures.length + ' passed');
+console.log((total - failed) + '/' + total + ' passed');
 if (failed) process.exit(1);

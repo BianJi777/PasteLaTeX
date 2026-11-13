@@ -158,3 +158,73 @@ function render(n) {
 export function mathmlToTex(mathml) {
   return render(parse(mathml)).replace(/\s+/g, " ").trim();
 }
+
+
+// Convert \(...\) and \[...\] delimiters (common in AI chat output) into
+// Typora-friendly $...$ and $$...$$ blocks. Code fences are left untouched.
+export function normalizeDelimiters(md) {
+  const parts = md.split(/(```[\s\S]*?```)/g);
+  for (let i = 0; i < parts.length; i++) {
+    if (i % 2 === 1) continue;
+    parts[i] = parts[i]
+      .replace(/\\\[([\s\S]*?)\\\]/g, (_, body) => "\n\n$$\n" + body.trim() + "\n$$\n\n")
+      .replace(/\\\(([\s\S]*?)\\\)/g, (_, body) => "$" + body.trim() + "$");
+  }
+  return parts.join("");
+}
+
+
+// Conservative bare-TeX recovery: only commands that REQUIRE braced arguments
+// (\frac{}{}, \sqrt{}, \binom{}{}) are wrapped, and only when their groups
+// parse. Symbol-only commands like \alpha or \sum are left alone to avoid
+// false positives in prose.
+const ARG_COMMANDS = { frac: 2, dfrac: 2, tfrac: 2, binom: 2, sqrt: 1 };
+
+function matchBrace(s, open) {
+  let depth = 0;
+  for (let i = open; i < s.length; i++) {
+    if (s[i] === "\\") { i++; continue; }
+    if (s[i] === "{") depth++;
+    else if (s[i] === "}") { depth--; if (depth === 0) return i; }
+  }
+  return -1;
+}
+
+function wrapSegment(seg) {
+  let out = "", last = 0;
+  const re = /\\([A-Za-z]+)/g;
+  let m;
+  while ((m = re.exec(seg))) {
+    const start = m.index;
+    const need = ARG_COMMANDS[m[1]];
+    if (!need) continue;
+    let pos = start + m[0].length;
+    let ok = true;
+    for (let k = 0; k < need; k++) {
+      if (m[1] === "sqrt" && k === 0) {
+        const opt = /^[ \t]*\[/.exec(seg.slice(pos));
+        if (opt) {
+          const close = seg.indexOf("]", pos);
+          if (close < 0) { ok = false; break; }
+          pos = close + 1;
+        }
+      }
+      const ws = /^[ \t]*/.exec(seg.slice(pos))[0].length;
+      if (seg[pos + ws] !== "{") { ok = false; break; }
+      const close = matchBrace(seg, pos + ws);
+      if (close < 0) { ok = false; break; }
+      pos = close + 1;
+    }
+    if (!ok) continue;
+    out += seg.slice(last, start) + "$" + seg.slice(start, pos) + "$";
+    last = pos;
+    re.lastIndex = pos;
+  }
+  return out + seg.slice(last);
+}
+
+export function wrapBareCommands(md) {
+  const parts = md.split(/(```[\s\S]*?```|`[^`\n]*`|\$\$[\s\S]*?\$\$|\$[^\$\n]+\$)/g);
+  for (let i = 0; i < parts.length; i += 2) parts[i] = wrapSegment(parts[i]);
+  return parts.join("");
+}

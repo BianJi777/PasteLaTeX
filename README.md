@@ -23,7 +23,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File pastelatex/install.ps1
 
 重启 Typora，从 AI 对话框复制带公式的回答，直接粘贴即可。
 
-**不想 clone？** 到 [Releases](https://github.com/BianJi777/PasteLaTeX/releases) 下载 `PasteLaTeX-0.3.0.zip`，解压到
+**不想 clone？** 到 [Releases](https://github.com/BianJi777/PasteLaTeX/releases) 下载 `PasteLaTeX-0.4.0.zip`，解压到
 `%APPDATA%\Typora\plugins\plugins\pastelatex\`，并在 `%APPDATA%\Typora\plugins\settings\plugins.json` 中加入 `"pastelatex": true`。
 
 ## 解决什么问题
@@ -47,7 +47,7 @@ PasteLaTeX 在粘贴时把每个 `.katex` 节点还原成 TeX，再交给 Typora
 
 ## 仓库结构
 
-    pastelatex/        Typora 插件（v0.3.0）
+    pastelatex/        Typora 插件（v0.4.0）
       glue-plugin.js    粘贴拦截 + 节点替换
       build-plugin.mjs  构建：把转换器内联进 dist/main.js
       manifest.json     插件清单
@@ -69,6 +69,9 @@ PasteLaTeX 在粘贴时把每个 `.katex` 节点还原成 TeX，再交给 Typora
 | 集合、逻辑、组合数 | ✅ |
 | 文本、角度、几何符号 | ✅ |
 | 嵌套公式 | ✅ |
+| AI 对话表格中的公式 | ✅ |
+| `\(...\)` / `\[...\]` 定界符 | ✅ |
+| 裸 `\frac{}{}`、`\sqrt{}` | ✅ |
 | 化学式 `\ce{}` | ⚠️ 降级为纯文本 |
 | `\color` / `\cancel` | ⚠️ 样式丢失（源头无信息） |
 
@@ -97,9 +100,19 @@ powershell -NoProfile -ExecutionPolicy Bypass -File pastelatex/uninstall.ps1
 
 ## 已知限制
 
-- 只处理 HTML 路径（聊天框复制的富文本）；纯文本 `\(...\)` 暂不转换。
 - `\color`、`\cancel`、`\ce` 的信息在 KaTeX 生成的 MathML 里就不存在，无法还原。
 - 依赖 Typora 的 MathJax 渲染，块级公式统一输出为 `$$\n…\n$$`。
+
+## 更新日志
+
+### v0.4.0
+- 支持 `<table>` 中的公式：保留表格结构，只替换单元格里的数学
+- 优先使用 `data-math-source`（精确源码），没有时再走 MathML
+- 支持 `\(...\)` / `\[...\]` 定界符
+- 支持裸 `\frac{}{}`、`\sqrt{}`、`\binom{}{}`（保守白名单）
+
+### v0.3.0
+- 插件 id 统一为 `pastelatex`
 
 ## 术语
 
