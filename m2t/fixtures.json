@@ -1,0 +1,122 @@
+[
+  {
+    "name": "sup_sub",
+    "mathml": "<math><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup><mo>=</mo><msup><mi>c</mi><mn>2</mn></msup></math>",
+    "tex": "a^{2}+b^{2}=c^{2}"
+  },
+  {
+    "name": "frac",
+    "mathml": "<math><mfrac><mrow><mi>n</mi><mo>(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo>)</mo></mrow><mn>2</mn></mfrac></math>",
+    "tex": "\\frac{n(n-1)}{2}"
+  },
+  {
+    "name": "sqrt",
+    "mathml": "<math><msqrt><mi>x</mi></msqrt></math>",
+    "tex": "\\sqrt{x}"
+  },
+  {
+    "name": "root",
+    "mathml": "<math><mroot><mrow><mi>x</mi><mo>+</mo><mn>1</mn></mrow><mn>3</mn></mroot></math>",
+    "tex": "\\sqrt[3]{x+1}"
+  },
+  {
+    "name": "sum_td",
+    "mathml": "<math><mo>∑</mo><mi>T</mi><mi>D</mi><mo>(</mo><msub><mi>v</mi><mi>i</mi></msub><mo>)</mo><mo>=</mo><mn>2</mn><mo>|</mo><mi>E</mi><mo>|</mo></math>",
+    "tex": "\\sum TD(v_{i})=2|E|"
+  },
+  {
+    "name": "sum_limits",
+    "mathml": "<math><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msup><mi>i</mi><mn>2</mn></msup></math>",
+    "tex": "\\sum_{i=1}^{n}i^{2}"
+  },
+  {
+    "name": "prod_limits",
+    "mathml": "<math><munderover><mo>∏</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></munderover><mi>k</mi></math>",
+    "tex": "\\prod_{k=1}^{m}k"
+  },
+  {
+    "name": "int_limits",
+    "mathml": "<math><msubsup><mo>∫</mo><mn>0</mn><mi>∞</mi></msubsup><msup><mi>e</mi><mrow><mo>−</mo><msup><mi>x</mi><mn>2</mn></msup></mrow></msup><mi>d</mi><mi>x</mi></math>",
+    "tex": "\\int_{0}^{\\infty}e^{-x^{2}}dx"
+  },
+  {
+    "name": "lim",
+    "mathml": "<math><munder><mi>lim</mi><mrow><mi>x</mi><mo>→</mo><mn>0</mn></mrow></munder><mfrac><mrow><mi>sin</mi><mi>x</mi></mrow><mi>x</mi></mfrac></math>",
+    "tex": "\\lim_{x\\to0}\\frac{\\sin x}{x}"
+  },
+  {
+    "name": "max",
+    "mathml": "<math><munder><mi>max</mi><mrow><mn>1</mn><mo>≤</mo><mi>i</mi><mo>≤</mo><mi>n</mi></mrow></munder><mo>|</mo><msub><mi>x</mi><mi>i</mi></msub><mo>|</mo></math>",
+    "tex": "\\max_{1\\le i\\le n}|x_{i}|"
+  },
+  {
+    "name": "log",
+    "mathml": "<math><msub><mi>log</mi><mn>2</mn></msub><mi>n</mi></math>",
+    "tex": "\\log_{2}n"
+  },
+  {
+    "name": "abs",
+    "mathml": "<math><mo>|</mo><mi>x</mi><mo>|</mo><mo>≤</mo><mn>1</mn></math>",
+    "tex": "|x|\\le1"
+  },
+  {
+    "name": "floor_ceil",
+    "mathml": "<math><mo>⌊</mo><mi>x</mi><mo>⌋</mo><mo>,</mo><mo>⌈</mo><mi>y</mi><mo>⌉</mo></math>",
+    "tex": "\\lfloor x\\rfloor,\\lceil y\\rceil"
+  },
+  {
+    "name": "matrix",
+    "mathml": "<math><mi>A</mi><mo>=</mo><mrow><mo>(</mo><mtable><mtr><mtd><mi>a</mi></mtd><mtd><mi>b</mi></mtd></mtr><mtr><mtd><mi>c</mi></mtd><mtd><mi>d</mi></mtd></mtr></mtable><mo>)</mo></mrow></math>",
+    "tex": "A=(\\begin{matrix}a & b \\\\ c & d\\end{matrix})"
+  },
+  {
+    "name": "cases",
+    "mathml": "<math><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mrow><mo>{</mo><mtable><mtr><mtd><mi>x</mi><mo>,</mo></mtd><mtd><mi>x</mi><mo>&gt;</mo><mn>0</mn></mtd></mtr><mtr><mtd><mo>−</mo><mi>x</mi><mo>,</mo></mtd><mtd><mi>x</mi><mo>≤</mo><mn>0</mn></mtd></mtr></mtable></mrow></math>",
+    "tex": "f(x)=\\begin{cases}x, & x>0 \\\\ -x, & x\\le0\\end{cases}"
+  },
+  {
+    "name": "aligned",
+    "mathml": "<math><mtable columnalign=\"right left\"><mtr><mtd><mi>a</mi></mtd><mtd><mo>=</mo><mi>b</mi><mo>+</mo><mi>c</mi></mtd></mtr><mtr><mtd><mi>d</mi></mtd><mtd><mo>=</mo><mi>e</mi><mo>−</mo><mi>f</mi></mtd></mtr></mtable></math>",
+    "tex": "\\begin{aligned}a & =b+c \\\\ d & =e-f\\end{aligned}"
+  },
+  {
+    "name": "mathbb",
+    "mathml": "<math><msup><mi mathvariant=\"double-struck\">R</mi><mi>n</mi></msup></math>",
+    "tex": "{\\mathbb{R}}^{n}"
+  },
+  {
+    "name": "text_nbsp",
+    "mathml": "<math><mtext>if&nbsp;</mtext><mi>x</mi><mo>&gt;</mo><mn>0</mn><mtext>&nbsp;then&nbsp;</mtext><mi>y</mi><mo>=</mo><mn>1</mn></math>",
+    "tex": "\\text{if }x>0\\text{ then }y=1"
+  },
+  {
+    "name": "braces",
+    "mathml": "<math><mo>{</mo><mi>x</mi><mo>|</mo><mi>x</mi><mo>&gt;</mo><mn>0</mn><mo>}</mo></math>",
+    "tex": "\\{x|x>0\\}"
+  },
+  {
+    "name": "underbrace",
+    "mathml": "<math><munder><munder><mo>⏟</mo><mrow><mi>a</mi><mo>+</mo><mi>b</mi></mrow></munder><mi>n</mi></munder></math>",
+    "tex": "\\underbrace{a+b}_{n}"
+  },
+  {
+    "name": "overbrace",
+    "mathml": "<math><mover><mover><mo>⏞</mo><mrow><mi>x</mi><mo>+</mo><mi>y</mi></mrow></mover><mi>m</mi></mover></math>",
+    "tex": "\\overbrace{x+y}^{m}"
+  },
+  {
+    "name": "hat",
+    "mathml": "<math><mover><mi>x</mi><mo>^</mo></mover></math>",
+    "tex": "\\hat{x}"
+  },
+  {
+    "name": "log_abs",
+    "mathml": "<math><mi>log</mi><mo>|</mo><mi>V</mi><mo>|</mo></math>",
+    "tex": "\\log|V|"
+  },
+  {
+    "name": "nested_sum",
+    "mathml": "<math><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></munderover><msub><mi>a</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></math>",
+    "tex": "\\sum_{i=1}^{n}\\sum_{j=1}^{m}a_{ij}"
+  }
+]

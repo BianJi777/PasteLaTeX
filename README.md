@@ -4,6 +4,9 @@
 
 [![release](https://img.shields.io/github/v/release/BianJi777/PasteLaTeX?color=22c55e)](https://github.com/BianJi777/PasteLaTeX/releases)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![test](https://github.com/BianJi777/PasteLaTeX/actions/workflows/test.yml/badge.svg)](https://github.com/BianJi777/PasteLaTeX/actions/workflows/test.yml)
+
+[English](README.en.md)
 
 ![粘贴前后对比](docs/before-after-demo.png)
 
