@@ -2,6 +2,27 @@
 
 把 AI 聊天框里的公式直接粘进 Typora：自动将 KaTeX MathML 还原成 LaTeX，保留列表格式与撤销栈。
 
+[![release](https://img.shields.io/github/v/release/BianJi777/PasteTeX?color=22c55e)](https://github.com/BianJi777/PasteTeX/releases)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+![粘贴前后对比](docs/before-after-demo.png)
+
+## 快速开始
+
+需要 Typora + [typora-community-plugin](https://github.com/typora-community-plugin/typora-community-plugin)。
+
+```powershell
+git clone https://github.com/BianJi777/PasteTeX.git
+cd PasteTeX
+node typora-math/build-plugin.mjs
+powershell -NoProfile -ExecutionPolicy Bypass -File typora-math/install.ps1
+```
+
+重启 Typora，从 AI 对话框复制带公式的回答，直接粘贴即可。
+
+**不想 clone？** 到 [Releases](https://github.com/BianJi777/PasteTeX/releases) 下载 `PasteTeX-0.1.0.zip`，解压到
+`%APPDATA%\Typora\plugins\plugins\typora-math\`，并在 `%APPDATA%\Typora\plugins\settings\plugins.json` 中加入 `"typora-math": true`。
+
 ## 解决什么问题
 
 DeepSeek / ChatGPT 网页端复制出来的公式，HTML 里是这样的：
@@ -39,25 +60,31 @@ PasteTeX 在粘贴时把每个 `.katex` 节点还原成 TeX，再交给 Typora �
 | 上下标、分数、根式 | ✅ |
 | 希腊字母、运算符 | ✅ |
 | 求和 / 求积 / 积分 / 极限 | ✅ |
-| 控制词边界（`\\sum TD`） | ✅ |
+| 控制词边界（`\sum TD`） | ✅ |
 | 矩阵、分段函数、多行对齐 | ✅ |
 | 重音、向量、上下括号 | ✅ |
 | 集合、逻辑、组合数 | ✅ |
 | 文本、角度、几何符号 | ✅ |
 | 嵌套公式 | ✅ |
-| 化学式 `\\ce{}` | ⚠️ 降级为纯文本 |
-| `\\color` / `\\cancel` | ⚠️ 样式丢失（源头无信息） |
+| 化学式 `\ce{}` | ⚠️ 降级为纯文本 |
+| `\color` / `\cancel` | ⚠️ 样式丢失（源头无信息） |
 
-## 安装
+## 安装（详细）
 
-需要 Typora + [typora-community-plugin](https://github.com/typora-community-plugin/typora-community-plugin)。
+1. 安装 [typora-community-plugin](https://github.com/typora-community-plugin/typora-community-plugin)；
+2. 构建并安装：
 
-```powershell
-node typora-math/build-plugin.mjs
-powershell -NoProfile -ExecutionPolicy Bypass -File typora-math/install.ps1
-```
+   ```powershell
+   node typora-math/build-plugin.mjs
+   powershell -NoProfile -ExecutionPolicy Bypass -File typora-math/install.ps1
+   ```
 
-重启 Typora 生效。
+3. 重启 Typora。
+
+安装脚本会写入：
+
+    %APPDATA%\Typora\plugins\plugins\typora-math\
+    %APPDATA%\Typora\plugins\settings\plugins.json
 
 ## 卸载
 
@@ -67,8 +94,8 @@ powershell -NoProfile -ExecutionPolicy Bypass -File typora-math/uninstall.ps1
 
 ## 已知限制
 
-- 只处理 HTML 路径（聊天框复制的富文本）；纯文本 `\\(...\\)` 暂不转换。
-- `\\color`、`\\cancel`、`\\ce` 的信息在 KaTeX 生成的 MathML 里就不存在，无法还原。
+- 只处理 HTML 路径（聊天框复制的富文本）；纯文本 `\(...\)` 暂不转换。
+- `\color`、`\cancel`、`\ce` 的信息在 KaTeX 生成的 MathML 里就不存在，无法还原。
 - 依赖 Typora 的 MathJax 渲染，块级公式统一输出为 `$$\n…\n$$`。
 
 ## 术语
