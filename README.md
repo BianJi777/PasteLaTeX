@@ -1,2 +1,76 @@
-# PasteTeX-
+# PasteTeX
+
 把 AI 聊天框里的公式直接粘进 Typora：自动将 KaTeX MathML 还原成 LaTeX，保留列表格式与撤销栈。
+
+## 解决什么问题
+
+DeepSeek / ChatGPT 网页端复制出来的公式，HTML 里是这样的：
+
+```html
+<span class="katex">
+  <span class="katex-mathml"><math><semantics><mrow>…</mrow></semantics></math></span>
+  <span class="katex-html">…视觉排版…</span>
+</span>
+```
+
+**没有 `<annotation encoding="application/x-tex">`**，拿不到原始 TeX。
+直接粘进 Typora 会变成重复的扁平文字：
+
+    C2n=n(n−1)2Cn2=2n(n−1)
+
+PasteTeX 在粘贴时把每个 `.katex` 节点还原成 TeX，再交给 Typora 自己的
+`editor.UserOp.pasteHandler`，所以列表、加粗、撤销栈都保持原样。
+
+## 仓库结构
+
+    typora-math/        Typora 插件（v0.1.0）
+      glue-plugin.js    粘贴拦截 + 节点替换
+      build-plugin.mjs  构建：把转换器内联进 dist/main.js
+      manifest.json     插件清单
+      install.ps1       安装
+      uninstall.ps1     卸载
+    m2t/
+      mathml2tex.mjs    纯函数 MathML → TeX 转换器（与宿主无关）
+
+## 能力矩阵
+
+| 类别 | 状态 |
+|---|---|
+| 上下标、分数、根式 | ✅ |
+| 希腊字母、运算符 | ✅ |
+| 求和 / 求积 / 积分 / 极限 | ✅ |
+| 控制词边界（`\\sum TD`） | ✅ |
+| 矩阵、分段函数、多行对齐 | ✅ |
+| 重音、向量、上下括号 | ✅ |
+| 集合、逻辑、组合数 | ✅ |
+| 文本、角度、几何符号 | ✅ |
+| 嵌套公式 | ✅ |
+| 化学式 `\\ce{}` | ⚠️ 降级为纯文本 |
+| `\\color` / `\\cancel` | ⚠️ 样式丢失（源头无信息） |
+
+## 安装
+
+需要 Typora + [typora-community-plugin](https://github.com/typora-community-plugin/typora-community-plugin)。
+
+```powershell
+node typora-math/build-plugin.mjs
+powershell -NoProfile -ExecutionPolicy Bypass -File typora-math/install.ps1
+```
+
+重启 Typora 生效。
+
+## 卸载
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File typora-math/uninstall.ps1
+```
+
+## 已知限制
+
+- 只处理 HTML 路径（聊天框复制的富文本）；纯文本 `\\(...\\)` 暂不转换。
+- `\\color`、`\\cancel`、`\\ce` 的信息在 KaTeX 生成的 MathML 里就不存在，无法还原。
+- 依赖 Typora 的 MathJax 渲染，块级公式统一输出为 `$$\n…\n$$`。
+
+## License
+
+MIT
