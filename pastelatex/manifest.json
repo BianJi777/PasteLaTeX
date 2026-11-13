@@ -1,9 +1,9 @@
 {
   "id": "bianji777.pastelatex",
   "name": "PasteLaTeX",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "Convert pasted AI-chat math (KaTeX MathML without annotation) into Typora-compatible $...$ LaTeX.",
-  "author": "dsh",
+  "author": "BianJi777",
   "minCoreVersion": "2.0.0",
   "platforms": [
     "win32",

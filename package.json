@@ -1,6 +1,6 @@
 {
   "name": "pastelatex",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "private": true,
   "description": "Paste AI-chat math (KaTeX MathML) into Typora as LaTeX",
   "type": "module",
@@ -8,5 +8,6 @@
     "build": "node pastelatex/build-plugin.mjs",
     "test": "node m2t/test.mjs"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "author": "BianJi777"
 }
