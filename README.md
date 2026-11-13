@@ -1,8 +1,8 @@
-# PasteTeX
+# PasteLaTeX
 
 把 AI 聊天框里的公式直接粘进 Typora：自动将 KaTeX MathML 还原成 LaTeX，保留列表格式与撤销栈。
 
-[![release](https://img.shields.io/github/v/release/BianJi777/PasteTeX?color=22c55e)](https://github.com/BianJi777/PasteTeX/releases)
+[![release](https://img.shields.io/github/v/release/BianJi777/PasteLaTeX?color=22c55e)](https://github.com/BianJi777/PasteLaTeX/releases)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 ![粘贴前后对比](docs/before-after-demo.png)
@@ -12,16 +12,16 @@
 需要 Typora + [typora-community-plugin](https://github.com/typora-community-plugin/typora-community-plugin)。
 
 ```powershell
-git clone https://github.com/BianJi777/PasteTeX.git
-cd PasteTeX
-node pastetex/build-plugin.mjs
-powershell -NoProfile -ExecutionPolicy Bypass -File pastetex/install.ps1
+git clone https://github.com/BianJi777/PasteLaTeX.git
+cd PasteLaTeX
+node pastelatex/build-plugin.mjs
+powershell -NoProfile -ExecutionPolicy Bypass -File pastelatex/install.ps1
 ```
 
 重启 Typora，从 AI 对话框复制带公式的回答，直接粘贴即可。
 
-**不想 clone？** 到 [Releases](https://github.com/BianJi777/PasteTeX/releases) 下载 `PasteTeX-0.2.0.zip`，解压到
-`%APPDATA%\Typora\plugins\plugins\pastetex\`，并在 `%APPDATA%\Typora\plugins\settings\plugins.json` 中加入 `"pastetex": true`。
+**不想 clone？** 到 [Releases](https://github.com/BianJi777/PasteLaTeX/releases) 下载 `PasteLaTeX-0.3.0.zip`，解压到
+`%APPDATA%\Typora\plugins\plugins\pastelatex\`，并在 `%APPDATA%\Typora\plugins\settings\plugins.json` 中加入 `"pastelatex": true`。
 
 ## 解决什么问题
 
@@ -39,12 +39,12 @@ DeepSeek / ChatGPT 网页端复制出来的公式，HTML 里是这样的：
 
     C2n=n(n−1)2Cn2=2n(n−1)
 
-PasteTeX 在粘贴时把每个 `.katex` 节点还原成 TeX，再交给 Typora 自己的
+PasteLaTeX 在粘贴时把每个 `.katex` 节点还原成 TeX，再交给 Typora 自己的
 `editor.UserOp.pasteHandler`，所以列表、加粗、撤销栈都保持原样。
 
 ## 仓库结构
 
-    pastetex/        Typora 插件（v0.2.0）
+    pastelatex/        Typora 插件（v0.3.0）
       glue-plugin.js    粘贴拦截 + 节点替换
       build-plugin.mjs  构建：把转换器内联进 dist/main.js
       manifest.json     插件清单
@@ -75,21 +75,21 @@ PasteTeX 在粘贴时把每个 `.katex` 节点还原成 TeX，再交给 Typora �
 2. 构建并安装：
 
    ```powershell
-   node pastetex/build-plugin.mjs
-   powershell -NoProfile -ExecutionPolicy Bypass -File pastetex/install.ps1
+   node pastelatex/build-plugin.mjs
+   powershell -NoProfile -ExecutionPolicy Bypass -File pastelatex/install.ps1
    ```
 
 3. 重启 Typora。
 
 安装脚本会写入：
 
-    %APPDATA%\Typora\plugins\plugins\pastetex\
+    %APPDATA%\Typora\plugins\plugins\pastelatex\
     %APPDATA%\Typora\plugins\settings\plugins.json
 
 ## 卸载
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File pastetex/uninstall.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File pastelatex/uninstall.ps1
 ```
 
 ## 已知限制

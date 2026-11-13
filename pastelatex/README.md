@@ -1,4 +1,4 @@
-# pastetex  v0.2.0
+# pastelatex  v0.3.0
 
 Typora 插件：把从 AI 聊天框复制出来的公式（KaTeX **MathML**，通常没有 `<annotation>`）转换成 Typora 能渲染的 `$...$`。
 
@@ -56,7 +56,7 @@ DeepSeek / ChatGPT 网页端复制出的 HTML 里，公式是：
 
 安装位置：
 
-    %APPDATA%\Typora\plugins\plugins\pastetex\
+    %APPDATA%\Typora\plugins\plugins\pastelatex\
     %APPDATA%\Typora\plugins\settings\plugins.json
 
 重启 Typora 生效。
