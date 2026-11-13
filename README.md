@@ -39,7 +39,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File pastelatex/install.ps1
 
 > 如果你在其他平台遇到问题，欢迎提 Issue，附上原始公式和期望效果。
 
-真实场景（ChatGPT → 直接粘贴 → PasteLaTeX 处理后）：
+真实场景（直接粘贴 → ChatGPT 源 → PasteLaTeX 处理后）：
 
 ![真实场景对比](docs/before-after-real.png)
 

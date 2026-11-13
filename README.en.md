@@ -36,7 +36,7 @@ Copying from the web UI of these products into Typora has been verified:
 | Gemini | ✅ | inline and display math |
 | Doubao | ✅ | inline math |
 
-Real world (ChatGPT → plain paste → after PasteLaTeX):
+Real world (plain paste → ChatGPT source → after PasteLaTeX):
 
 ![real world](docs/before-after-real.png)
 
