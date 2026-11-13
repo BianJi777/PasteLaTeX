@@ -11,7 +11,7 @@ DeepSeek / ChatGPT 网页端复制出的 HTML 里，公式是：
       <span class="katex-html">…视觉排版…</span>
     </span>
 
-**没有 `<annotation encoding="application/x-tex">`**，拿不到原始 TeX，直接粘贴会在 Typora 里变成重复的扁平文字。
+**没有 `<annotation encoding="application/x-tex">`**，拿不到原始公式源码（TeX / LaTeX 数学语法），直接粘贴会在 Typora 里变成重复的扁平文字。
 
 插件在粘贴时把每个 `.katex` 还原成 TeX，再交给 Typora 自己的
 `editor.UserOp.pasteHandler`，列表、加粗、撤销栈都保持原样。

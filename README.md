@@ -13,7 +13,7 @@ DeepSeek / ChatGPT 网页端复制出来的公式，HTML 里是这样的：
 </span>
 ```
 
-**没有 `<annotation encoding="application/x-tex">`**，拿不到原始 TeX。
+**没有 `<annotation encoding="application/x-tex">`**，拿不到原始公式源码（TeX / LaTeX 数学语法）。
 直接粘进 Typora 会变成重复的扁平文字：
 
     C2n=n(n−1)2Cn2=2n(n−1)
@@ -70,6 +70,12 @@ powershell -NoProfile -ExecutionPolicy Bypass -File typora-math/uninstall.ps1
 - 只处理 HTML 路径（聊天框复制的富文本）；纯文本 `\\(...\\)` 暂不转换。
 - `\\color`、`\\cancel`、`\\ce` 的信息在 KaTeX 生成的 MathML 里就不存在，无法还原。
 - 依赖 Typora 的 MathJax 渲染，块级公式统一输出为 `$$\n…\n$$`。
+
+## 术语
+
+- **TeX**：Knuth 的排版引擎，公式语法（`\frac`、`\sum`）属于 TeX 数学模式。
+- **LaTeX**：建在 TeX 之上的宏包，多了 `\documentclass`、`\begin{document}` 这类文档结构。
+- 本项目还原的是**公式源码**，不是一份 LaTeX 文档，所以文中用「TeX / LaTeX 数学语法」并称。
 
 ## License
 
