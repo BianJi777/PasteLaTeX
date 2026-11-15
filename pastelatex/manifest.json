@@ -2,7 +2,7 @@
   "id": "bianji777.pastelatex",
   "name": "PasteLaTeX",
   "version": "0.6.2",
-  "description": "Convert pasted AI-chat math (KaTeX MathML without annotation) into Typora-compatible $...$ LaTeX.",
+  "description": "Paste AI-chat formulas (ChatGPT, DeepSeek, Gemini) into Typora as LaTeX — keeps tables, $$ blocks and undo.",
   "author": "BianJi777",
   "minCoreVersion": "2.0.0",
   "platforms": [
