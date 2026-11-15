@@ -5,14 +5,23 @@
 [![release](https://img.shields.io/github/v/release/BianJi777/PasteLaTeX?color=22c55e)](https://github.com/BianJi777/PasteLaTeX/releases)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![test](https://github.com/BianJi777/PasteLaTeX/actions/workflows/test.yml/badge.svg)](https://github.com/BianJi777/PasteLaTeX/actions/workflows/test.yml)
+[![marketplace](https://img.shields.io/badge/marketplace-listed-22c55e)](https://github.com/typora-community-plugin/typora-plugin-releases)
 
 [English](README.en.md)
 
 ![粘贴前后对比](docs/comparison-deepseek-chatgpt.png)
 
-## 快速开始
+## 安装
 
-需要 Typora + [typora-community-plugin](https://github.com/typora-community-plugin/typora-community-plugin)。
+### 方式一：插件市场（推荐）
+
+先安装 [typora-community-plugin](https://github.com/typora-community-plugin/typora-community-plugin)，然后：
+
+**Typora → 设置 → 插件 → 插件市场 → 搜索 `PasteLaTeX` → 安装 → 重启**
+
+已经收录进社区插件清单（[PR #23](https://github.com/typora-community-plugin/typora-plugin-releases/pull/23) 已合并）。
+
+### 方式二：源码安装
 
 ```powershell
 git clone https://github.com/BianJi777/PasteLaTeX.git
@@ -21,10 +30,12 @@ node pastelatex/build-plugin.mjs
 powershell -NoProfile -ExecutionPolicy Bypass -File pastelatex/install.ps1
 ```
 
-重启 Typora，从 AI 对话框复制带公式的回答，直接粘贴即可。
+### 方式三：手动下载
 
-**不想 clone？** 到 [Releases](https://github.com/BianJi777/PasteLaTeX/releases) 下载 `plugin.zip`，解压到
+到 [Releases](https://github.com/BianJi777/PasteLaTeX/releases) 下载 `plugin.zip`，解压到
 `%APPDATA%\Typora\plugins\plugins\bianji777.pastelatex\`，并在 `%APPDATA%\Typora\plugins\settings\plugins.json` 中加入 `"bianji777.pastelatex": true`。
+
+重启 Typora，从 AI 对话框复制带公式的回答，直接粘贴即可。
 
 ## 已验证平台
 

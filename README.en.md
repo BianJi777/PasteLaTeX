@@ -39,7 +39,15 @@ Copying from the web UI of these products into Typora has been verified:
 
 ## Install
 
-Requires Typora and [typora-community-plugin](https://github.com/typora-community-plugin/typora-community-plugin).
+### Option 1: plugin marketplace (recommended)
+
+Install [typora-community-plugin](https://github.com/typora-community-plugin/typora-community-plugin) first, then:
+
+**Typora → Preferences → Plugins → Marketplace → search `PasteLaTeX` → Install → restart**
+
+Listed in the community plugin list ([PR #23](https://github.com/typora-community-plugin/typora-plugin-releases/pull/23) merged).
+
+### Option 2: from source
 
 ```powershell
 git clone https://github.com/BianJi777/PasteLaTeX.git
@@ -48,11 +56,13 @@ node pastelatex/build-plugin.mjs
 powershell -NoProfile -ExecutionPolicy Bypass -File pastelatex/install.ps1
 ```
 
-Restart Typora. Copy an answer containing formulas and paste it — done.
+### Option 3: manual download
 
-Or grab `plugin.zip` from [Releases](https://github.com/BianJi777/PasteLaTeX/releases) and unpack it to
+Grab `plugin.zip` from [Releases](https://github.com/BianJi777/PasteLaTeX/releases) and unpack it to
 `%APPDATA%\Typora\plugins\plugins\bianji777.pastelatex\`, then add `"bianji777.pastelatex": true` to
 `%APPDATA%\Typora\plugins\settings\plugins.json`.
+
+Restart Typora, copy an answer containing formulas and paste it.
 
 ## Supported
 
