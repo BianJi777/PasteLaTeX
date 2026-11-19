@@ -1,8 +1,10 @@
+__MDTABLE__
+
 __PIPES__
 
 __MATHML2TEX__
 
-var DEFAULTS = { convertKatex: true, convertDelims: true, wrapBare: true, escapePipes: true, debug: false };
+var DEFAULTS = { convertKatex: true, convertDelims: true, wrapBare: true, escapePipes: true, preferMarkdownTable: true, debug: false };
 var SETTINGS = DEFAULTS;
 var LOG = 'C:/Users/34132/.typora/paste-math.log';
 
@@ -121,6 +123,13 @@ function handlePaste(ev) {
     var hasDelims = SETTINGS.convertDelims && (/\\[([\[]/.test(html) || /\\[([\[]/.test(plain));
     var hasBare = SETTINGS.wrapBare && (/\\(frac|dfrac|tfrac|binom|sqrt)\s*[[{]/.test(html) || /\\(frac|dfrac|tfrac|binom|sqrt)\s*[[{]/.test(plain));
 
+    if (SETTINGS.preferMarkdownTable && plain && looksLikeMarkdownTable(plain)) {
+      ev.preventDefault();
+      ev.stopImmediatePropagation();
+      try { ed.UserOp.pasteHandler(ed, plain.replace(/^\uFEFF/, ''), true); log('md-table paste len=' + plain.length); }
+      catch (e7) { log('md-table ERR ' + e7.message); }
+      return;
+    }
     var noMath = !hasNodes && !hasSources && !hasDelims && !hasBare;
     if (SETTINGS.escapePipes && noMath && !hasTable && plain && plain.indexOf('|') >= 0 && caretInTable()) {
       var esc = escapePipes(plain);

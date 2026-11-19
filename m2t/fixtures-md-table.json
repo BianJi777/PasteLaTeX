@@ -1,0 +1,32 @@
+[
+  {
+    "name": "simple table",
+    "input": "| a | b |\n| --- | --- |\n| 1 | 2 |",
+    "expected": true
+  },
+  {
+    "name": "leading spaces",
+    "input": "  | a | b |\n  | --- | --- |",
+    "expected": true
+  },
+  {
+    "name": "BOM table",
+    "input": "﻿| a |\n| --- |",
+    "expected": true
+  },
+  {
+    "name": "plain text",
+    "input": "hello world",
+    "expected": false
+  },
+  {
+    "name": "single pipe line",
+    "input": "| not a table",
+    "expected": false
+  },
+  {
+    "name": "empty",
+    "input": "",
+    "expected": false
+  }
+]

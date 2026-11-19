@@ -3,6 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { mathmlToTex, normalizeDelimiters, wrapBareCommands } from './mathml2tex.mjs';
 import { escapePipes } from './pipes.mjs';
+import { looksLikeMarkdownTable } from './md-table.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const groups = [
@@ -10,6 +11,7 @@ const groups = [
   { file: 'fixtures-delimiters.json', run: (c) => [normalizeDelimiters(c.input), c.expected] },
   { file: 'fixtures-bare.json', run: (c) => [wrapBareCommands(c.input), c.expected] },
   { file: 'fixtures-pipes.json', run: (c) => [escapePipes(c.input), c.expected] },
+  { file: 'fixtures-md-table.json', run: (c) => [looksLikeMarkdownTable(c.input), c.expected] },
 ];
 
 let total = 0, failed = 0;

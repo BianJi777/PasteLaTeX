@@ -154,6 +154,11 @@ powershell -NoProfile -ExecutionPolicy Bypass -File pastelatex/uninstall.ps1
 
 ## 更新日志
 
+### v0.6.4
+- 修复：右键「复制表格」后粘贴，公式定界符丢失、最后一列被截断
+- 原因：Typora 复制表格时同时给出 HTML 版（有损）和纯文本版（正确），原流程用了 HTML 版
+- 改为：剪贴板纯文本是 Markdown 表格时，优先按纯文本粘贴（`preferMarkdownTable`）
+
 ### v0.6.3
 - 新增：在表格单元格内粘贴纯文本时，自动转义 `|`，避免内容被拆列截断
 - 只在「无公式 + 光标在表格内」时生效，可在 `settings.json` 用 `escapePipes: false` 关闭
