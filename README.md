@@ -154,6 +154,13 @@ powershell -NoProfile -ExecutionPolicy Bypass -File pastelatex/uninstall.ps1
 
 ## 更新日志
 
+### v0.6.3
+- 新增：在表格单元格内粘贴纯文本时，自动转义 `|`，避免内容被拆列截断
+- 只在「无公式 + 光标在表格内」时生效，可在 `settings.json` 用 `escapePipes: false` 关闭
+
+### v0.6.2
+- 修正 `manifest.json` 的作者为 BianJi777
+
 ### v0.6.1
 - 修复：带列表的内容被压成一段（列表改走 HTML 粘贴通道）
 - 插件 id 采用市场格式 `bianji777.pastelatex`
