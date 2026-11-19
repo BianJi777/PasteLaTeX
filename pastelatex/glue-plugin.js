@@ -110,11 +110,24 @@ function handlePaste(ev) {
     var cd = ev.clipboardData;
     if (!cd) return;
     var types = Array.prototype.slice.call(cd.types || []);
-    if (types.indexOf('text/markhtml') >= 0) { log('skip markhtml'); return; }
 
     var html = '', plain = '';
     try { html = cd.getData('text/html') || ''; } catch (e) {}
     try { plain = cd.getData('text/plain') || ''; } catch (e) {}
+
+    if (types.indexOf('text/markhtml') >= 0) {
+      // Typora internal copy: its plain-text flavor is already correct Markdown.
+      // Prefer it when pasting into a table cell, where the native path truncates at "|".
+      if (SETTINGS.preferMarkdownTable && caretInTable() && plain && plain.indexOf('|') >= 0) {
+        ev.preventDefault();
+        ev.stopImmediatePropagation();
+        try { ed.UserOp.pasteHandler(ed, plain.replace(/^\uFEFF/, ''), true); log('markhtml->plain len=' + plain.length); }
+        catch (e0) { log('markhtml ERR ' + e0.message); }
+        return;
+      }
+      log('skip markhtml');
+      return;
+    }
 
     var hasNodes = SETTINGS.convertKatex && !!html && (html.indexOf('katex') >= 0 || html.indexOf('<math') >= 0);
     var hasSources = SETTINGS.convertKatex && !!html && html.indexOf('data-math-source') >= 0;

@@ -154,6 +154,11 @@ powershell -NoProfile -ExecutionPolicy Bypass -File pastelatex/uninstall.ps1
 
 ## 更新日志
 
+### v0.6.5
+- 修复：Typora 内部复制（剪贴板带 `text/markhtml`）粘进表格单元格时仍被截断
+- 原因：遇到 markhtml 直接放行，而 Typora 原生粘贴不转义竖线；其实纯文本版已是正确 Markdown
+- 改为：表格内粘贴时优先使用纯文本版（`markhtml->plain`）
+
 ### v0.6.4
 - 修复：右键「复制表格」后粘贴，公式定界符丢失、最后一列被截断
 - 原因：Typora 复制表格时同时给出 HTML 版（有损）和纯文本版（正确），原流程用了 HTML 版
