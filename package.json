@@ -1,6 +1,6 @@
 {
   "name": "pastelatex",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "private": true,
   "description": "Paste AI-chat math (KaTeX MathML) into Typora as LaTeX",
   "type": "module",

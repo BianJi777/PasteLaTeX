@@ -1,0 +1,52 @@
+[
+  {
+    "name": "plain pipe",
+    "input": "a|b",
+    "expected": "a\\|b"
+  },
+  {
+    "name": "cell-like text",
+    "input": "O(1)~O(|V|)：顺 x 的链表",
+    "expected": "O(1)~O(\\|V\\|)：顺 x 的链表"
+  },
+  {
+    "name": "inline math untouched",
+    "input": "$|x|$",
+    "expected": "$|x|$"
+  },
+  {
+    "name": "inline code untouched",
+    "input": "`a|b`",
+    "expected": "`a|b`"
+  },
+  {
+    "name": "already escaped",
+    "input": "\\|",
+    "expected": "\\|"
+  },
+  {
+    "name": "display math untouched",
+    "input": "$$ |x| $$",
+    "expected": "$$ |x| $$"
+  },
+  {
+    "name": "math around pipes",
+    "input": "$x$|$y$",
+    "expected": "$x$\\|$y$"
+  },
+  {
+    "name": "paren math untouched",
+    "input": "\\(a|b\\)",
+    "expected": "\\(a|b\\)"
+  },
+  {
+    "name": "double backslash pipe",
+    "input": "\\\\|",
+    "expected": "\\\\\\|"
+  },
+  {
+    "name": "table row",
+    "input": "|a|b|",
+    "expected": "\\|a\\|b\\|"
+  }
+]

@@ -1,6 +1,8 @@
+__PIPES__
+
 __MATHML2TEX__
 
-var DEFAULTS = { convertKatex: true, convertDelims: true, wrapBare: true, debug: false };
+var DEFAULTS = { convertKatex: true, convertDelims: true, wrapBare: true, escapePipes: true, debug: false };
 var SETTINGS = DEFAULTS;
 var LOG = 'C:/Users/34132/.typora/paste-math.log';
 
@@ -17,6 +19,17 @@ function notify(msg) {
     }
   } catch (e) {}
 }
+function caretInTable() {
+  try {
+    var sel = document.getSelection();
+    if (!sel || !sel.anchorNode) return false;
+    var node = sel.anchorNode;
+    var el = node.nodeType === 1 ? node : node.parentElement;
+    if (!el || !el.closest) return false;
+    return !!el.closest('td, th');
+  } catch (e) { return false; }
+}
+
 function loadSettings(dir) {
   try {
     var fs = fsx();
@@ -108,7 +121,18 @@ function handlePaste(ev) {
     var hasDelims = SETTINGS.convertDelims && (/\\[([\[]/.test(html) || /\\[([\[]/.test(plain));
     var hasBare = SETTINGS.wrapBare && (/\\(frac|dfrac|tfrac|binom|sqrt)\s*[[{]/.test(html) || /\\(frac|dfrac|tfrac|binom|sqrt)\s*[[{]/.test(plain));
 
-    if (!hasNodes && !hasSources && !hasDelims && !hasBare) { log('skip no-math'); return; }
+    var noMath = !hasNodes && !hasSources && !hasDelims && !hasBare;
+    if (SETTINGS.escapePipes && noMath && !hasTable && plain && plain.indexOf('|') >= 0 && caretInTable()) {
+      var esc = escapePipes(plain);
+      if (esc !== plain && sameSpans(plain, esc)) {
+        ev.preventDefault();
+        ev.stopImmediatePropagation();
+        try { ed.UserOp.pasteHandler(ed, esc, true); log('pipe esc len=' + esc.length); }
+        catch (e6) { log('pipe esc ERR ' + e6.message); }
+        return;
+      }
+    }
+    if (noMath) { log('skip no-math'); return; }
 
     if (html && (hasTable || hasList || hasSources || (!hasNodes && (hasDelims || hasBare)))) {
       var fixed = (hasNodes || hasSources) ? convertHtml(html) : fixHtmlText(html);
